@@ -16,12 +16,9 @@
 
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
 using biz.dfch.CS.Utilities.Logging;
 using System.Web.Http.OData.Routing;
 using System.Web.Http.OData;

@@ -15,9 +15,7 @@
  */
 
 using System;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MSTestExtensions;
 using biz.dfch.CS.Utilities;
 using biz.dfch.CS.Web.Utilities.Rest;
 
@@ -41,17 +39,17 @@ namespace biz.dfch.CS.Web.Utilities.Tests
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void ParseWithNonCaseMatchingValueNotIgnoringCaseThrowsArgumentException()
         {
-            ThrowsAssert.Throws<ArgumentException>(() => EnumUtil.Parse<ContentType>("aPPlicationJson", false),
-                "Requested value 'aPPlicationJson' was not found.");
+            EnumUtil.Parse<ContentType>("aPPlicationJson", false);
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void ParseWithInvalidValueThrowsArgumentException()
         {
-            ThrowsAssert.Throws<ArgumentException>(() => EnumUtil.Parse<ContentType>("test", false),
-                "Requested value 'test' was not found.");
+            EnumUtil.Parse<ContentType>("test", false);
         }
     }
 }

@@ -16,13 +16,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using biz.dfch.CS.Utilities.Attributes;
-using MSTestExtensions;
 using Telerik.JustMock;
 using HttpMethod = biz.dfch.CS.Web.Utilities.Rest.HttpMethod;
 
@@ -68,34 +66,86 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         }
 
         [TestMethod]
-        public void InvokeWithInvalidUriThrowsUriFormatException()
+        [ExpectedException(typeof(UriFormatException))]
+        public void InvokeWithInvalidUriThrowsUriFormatException1()
         {
             var invalidUri = "abc";
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            ThrowsAssert.Throws<UriFormatException>(() => restCallExecutor.Invoke(invalidUri));
-            ThrowsAssert.Throws<UriFormatException>(() => restCallExecutor.Invoke(invalidUri, null));
-            ThrowsAssert.Throws<UriFormatException>(() => restCallExecutor.Invoke(HttpMethod.Head, invalidUri, null, null));
+            restCallExecutor.Invoke(invalidUri);
         }
 
         [TestMethod]
-        public void InvokeWithNullUriThrowsArgumentException()
+        [ExpectedException(typeof(UriFormatException))]
+        public void InvokeWithInvalidUriThrowsUriFormatException2()
+        {
+            var invalidUri = "abc";
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            restCallExecutor.Invoke(invalidUri, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(UriFormatException))]
+        public void InvokeWithInvalidUriThrowsUriFormatException3()
+        {
+            var invalidUri = "abc";
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            restCallExecutor.Invoke(HttpMethod.Head, invalidUri, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvokeWithNullUriThrowsArgumentException1()
         {
             String nullUri = null;
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            ThrowsAssert.Throws<ArgumentException>(() => restCallExecutor.Invoke(nullUri));
-            ThrowsAssert.Throws<ArgumentException>(() => restCallExecutor.Invoke(nullUri, null));
-            ThrowsAssert.Throws<ArgumentException>(() => restCallExecutor.Invoke(HttpMethod.Head, nullUri, null, null));
+            restCallExecutor.Invoke(nullUri);
         }
 
         [TestMethod]
-        public void InvokeWithWhitespaceUriThrowsArgumentException()
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvokeWithNullUriThrowsArgumentException2()
+        {
+            String nullUri = null;
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            restCallExecutor.Invoke(nullUri, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvokeWithNullUriThrowsArgumentException3()
+        {
+            String nullUri = null;
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            restCallExecutor.Invoke(HttpMethod.Head, nullUri, null, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvokeWithWhitespaceUriThrowsArgumentException1()
         {
             var whitespaceUri = " ";
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            ThrowsAssert.Throws<ArgumentException>(() => restCallExecutor.Invoke(whitespaceUri));
-            ThrowsAssert.Throws<ArgumentException>(() => restCallExecutor.Invoke(whitespaceUri, null));
-            ThrowsAssert.Throws<ArgumentException>(() => restCallExecutor.Invoke(HttpMethod.Head, whitespaceUri, null, null));
+            restCallExecutor.Invoke(whitespaceUri);
         }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvokeWithWhitespaceUriThrowsArgumentException2()
+        {
+            var whitespaceUri = " ";
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            restCallExecutor.Invoke(whitespaceUri, null);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void InvokeWithWhitespaceUriThrowsArgumentException3()
+        {
+            var whitespaceUri = " ";
+            RestCallExecutor restCallExecutor = new RestCallExecutor();
+            restCallExecutor.Invoke(HttpMethod.Head, whitespaceUri, null, null);
+        }
+
 
         [TestMethod]
         public void InvokeGetExecutesGetRequestOnUriWithProvidedHeadersEnsuresSuccessStatusCodeAndReturnsResponseContent()
@@ -160,6 +210,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(HttpRequestException))]
         public void InvokeExecutesThrowsHttpRequestExceptionIfEnsureSuccessStatusCodeFails()
         {
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
@@ -182,7 +233,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            ThrowsAssert.Throws<HttpRequestException>(() => restCallExecutor.Invoke(URI, CreateSampleHeaders()));
+            restCallExecutor.Invoke(URI, CreateSampleHeaders());
 
             Mock.Assert(_httpClient);
             Mock.Assert(mockedResponseMessage);

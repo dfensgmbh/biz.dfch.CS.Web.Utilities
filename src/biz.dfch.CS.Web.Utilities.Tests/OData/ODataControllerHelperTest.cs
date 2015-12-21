@@ -24,7 +24,6 @@ using biz.dfch.CS.Web.Utilities.OData;
 using Microsoft.Data.OData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Telerik.JustMock;
-using Telerik.JustMock.Helpers;
 using System.Web.Http.OData;
 using System.Web.Http.OData.Extensions;
 using System.Web.Http.OData.Routing;
@@ -53,7 +52,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
 
         [TestMethod]
         [ExpectedException(typeof(ODataErrorException))]
-        public void doResponseCreatedForControllerNotContainingControllerValueInRouteDataThrowsODataErrorException()
+        public void DoResponseCreatedForControllerNotContainingControllerValueInRouteDataThrowsODataErrorException()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.ControllerContext.RouteData.Values["controller"])
@@ -69,7 +68,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
         }
 
         [TestMethod]
-        public void doResponseCreatedReturnsHttpResponseMessageWithStatusCreated()
+        public void DoResponseCreatedReturnsHttpResponseMessageWithStatusCreated()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.Request).Returns(httpRequestMessage).MustBeCalled();
@@ -89,7 +88,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
         }
 
         [TestMethod]
-        public void doResponseCreatedReturnsHttpResponseMessageWithLocationSetInHeaders()
+        public void DoResponseCreatedReturnsHttpResponseMessageWithLocationSetInHeaders()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.Request)
@@ -113,7 +112,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
         }
 
         [TestMethod]
-        public void doResponseCreatedReturnsHttpResponseMessageWithETagSetInHeaders()
+        public void DoResponseCreatedReturnsHttpResponseMessageWithETagSetInHeaders()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.Request).Returns(httpRequestMessage).MustBeCalled();
@@ -135,7 +134,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
 
         [TestMethod]
         [ExpectedException(typeof(ODataErrorException))]
-        public void doResponseAcceptedForControllerNotContainingControllerValueInRouteDataThrowsODataErrorException()
+        public void DoResponseAcceptedForControllerNotContainingControllerValueInRouteDataThrowsODataErrorException()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.ControllerContext.RouteData.Values.ContainsKey("controller"))
@@ -148,7 +147,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
         }
 
         [TestMethod]
-        public void doResponseAcceptedReturnsHttpResponseMessageWithStatusCreated()
+        public void DoResponseAcceptedReturnsHttpResponseMessageWithStatusCreated()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.Request).Returns(httpRequestMessage).MustBeCalled();
@@ -169,7 +168,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
         }
 
         [TestMethod]
-        public void doResponseAcceptedReturnsHttpResponseMessageWithLocationSetInHeaders()
+        public void DoResponseAcceptedReturnsHttpResponseMessageWithLocationSetInHeaders()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.Request)
@@ -193,7 +192,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
         }
 
         [TestMethod]
-        public void doResponseAcceptedReturnsHttpResponseMessageWithETagSetInHeaders()
+        public void DoResponseAcceptedReturnsHttpResponseMessageWithETagSetInHeaders()
         {
             controller = Mock.Create<ODataController>();
             Mock.Arrange(() => controller.Request)
