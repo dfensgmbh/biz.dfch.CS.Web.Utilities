@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("biz.dfch.CS.Web.Utilities.Tests")]
-[assembly: AssemblyDescription("Tests for CSharp System Utilities")]
+[assembly: AssemblyDescription("Tests for Utilities for web applications")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("d-fens GmbH")]
 [assembly: AssemblyProduct("biz.dfch.CS.Web.Utilities.Tests")]
-[assembly: AssemblyCopyright("Copyright © 2015 d-fens GmbH")]
+[assembly: AssemblyCopyright("Copyright ©  2015 d-fens GmbH")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -29,8 +29,8 @@ using System.Runtime.InteropServices;
 //      Build Number
 //      Revision
 //
-// You can specify all the values or you can default the Build and Revision Numbers 
+// You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("4200.4201.4202.4203")]
-[assembly: AssemblyFileVersion("4200.4201.4202.4203")]
+[assembly: AssemblyVersion("1.0.0.*")]
+// [assembly: AssemblyFileVersion("1.0.0.0")]
