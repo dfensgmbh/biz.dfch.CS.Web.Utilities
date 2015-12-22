@@ -5,3 +5,30 @@
 [![Version](https://img.shields.io/nuget/v/biz.dfch.CS.Web.Utilities.svg)](https://www.nuget.org/packages/biz.dfch.CS.Web.Utilities/)
 
 Utilities for web applications
+
+Assembly: biz.dfch.CS.Web.Utilities.dll
+
+d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
+
+## Download
+
+* Get it on [NuGet](https://www.nuget.org/packages/biz.dfch.CS.Web.Utilities/)
+
+* See [Releases](https://github.com/dfch/biz.dfch.CS.Web.Utilities/releases) on [GitHub](https://github.com/dfch/biz.dfch.CS.Web.Utilities)
+
+## Description
+
+This project containts a collection of utility classes that provide functionalities like
+
+* 
+
+**Telerik JustMock has to be licensed separately. Only the code samples (source code files) are licensed under the Apache 2.0 license. The Telerik JustMock software has to be licensed separately. See the NOTICE file for more information about this.**
+
+## [Release Notes](https://github.com/dfch/biz.dfch.CS.Web.Utilities/releases)
+
+See also [Releases](https://github.com/dfch/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfch/biz.dfch.CS.Web.Utilities/tags)
+
+### 1.0.0 - 20151221
+
+* Initial release
+* Extracted from biz.dfch.CS.System.Utilities
