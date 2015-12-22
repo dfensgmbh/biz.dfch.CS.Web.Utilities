@@ -14,7 +14,7 @@ d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
 
 * Get it on [NuGet](https://www.nuget.org/packages/biz.dfch.CS.Web.Utilities/)
 
-* See [Releases](https://github.com/dfch/biz.dfch.CS.Web.Utilities/releases) on [GitHub](https://github.com/dfch/biz.dfch.CS.Web.Utilities)
+* See [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) on [GitHub](https://github.com/dfch/biz.dfch.CS.Web.Utilities)
 
 ## Description
 
@@ -22,15 +22,15 @@ This project containts a collection of utility classes that provide functionalit
 
 * Contracts for endpoints
 * ODataController helper
-* REST helper.
+* REST helper
 
 **Telerik JustMock has to be licensed separately. Only the code samples (source code files) are licensed under the Apache 2.0 license. The Telerik JustMock software has to be licensed separately. See the NOTICE file for more information about this.**
 
-## [Release Notes](https://github.com/dfch/biz.dfch.CS.Web.Utilities/releases)
+## [Release Notes](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases)
 
-See also [Releases](https://github.com/dfch/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfch/biz.dfch.CS.Web.Utilities/tags)
+See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 
-### 1.0.0 - 20151221
+### 1.0.0 - yyyymmdd
 
 * Initial release
 * Extracted from biz.dfch.CS.System.Utilities
