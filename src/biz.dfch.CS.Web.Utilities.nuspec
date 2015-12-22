@@ -25,7 +25,7 @@ Collection of web utility classes that provide functionalities like
         <summary>Collection of web utility classes</summary>
         <releaseNotes>20151222
 * Initial release
-* Extracted from biz.dfch.CS.System.Utilities</releaseNotes>
+* Extracted web related classes from biz.dfch.CS.System.Utilities</releaseNotes>
         <copyright>Copyright © 2015 d-fens GmbH</copyright>
         <tags>dfch web utilities C#</tags>
         <dependencies>
