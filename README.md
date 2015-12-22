@@ -20,7 +20,9 @@ d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
 
 This project containts a collection of utility classes that provide functionalities like
 
-* 
+* Contracts for endpoints
+* ODataController helper
+* REST helper.
 
 **Telerik JustMock has to be licensed separately. Only the code samples (source code files) are licensed under the Apache 2.0 license. The Telerik JustMock software has to be licensed separately. See the NOTICE file for more information about this.**
 
