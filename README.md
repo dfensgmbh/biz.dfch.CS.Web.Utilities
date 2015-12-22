@@ -30,7 +30,7 @@ This project containts a collection of utility classes that provide functionalit
 
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 
-### 1.0.0 - yyyymmdd
+### 1.0.0 - 20151222
 
 * Initial release
 * Extracted from biz.dfch.CS.System.Utilities
