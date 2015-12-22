@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>biz.dfch.CS.Web.Utilities</id>
+        <version>1.0.0</version>
+        <title>biz.dfch.CS.Web.Utilities</title>
+        <authors>d-fens GmbH</authors>
+        <owners>d-fens GmbH</owners>
+		<licenseUrl>https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities</projectUrl>
+        <iconUrl>https://avatars1.githubusercontent.com/u/8310404?v=3&amp;s=200</iconUrl>
+        <requireLicenseAcceptance>true</requireLicenseAcceptance>
+        <description>
+biz.dfch.CS.Web.Utilities
+========================
+
+Utilities for web applications
+
+Collection of web utility classes that provide functionalities like
+
+* Contracts for endpoints
+* ODataController helper
+* REST helper
+		</description>
+        <summary>Collection of web utility classes</summary>
+        <releaseNotes>20151222
+* Initial release
+* Extracted web related classes from biz.dfch.CS.System.Utilities</releaseNotes>
+        <copyright>Copyright © 2015 d-fens GmbH</copyright>
+        <tags>dfch web utilities C#</tags>
+        <dependencies>
+			<dependency id="biz.dfch.CS.System.Utilities" version="2.0.0" />
+			<dependency id="log4net" version="2.0.3" />
+			<dependency id="Newtonsoft.Json" version="6.0.8" />
+			<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
+			<dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+			<dependency id="Microsoft.AspNet.WebApi.OData" version="5.2.0" />
+			<dependency id="Microsoft.Data.Edm" version="5.6.4" />
+			<dependency id="Microsoft.Data.OData" version="5.6.0" />
+			<dependency id="EntityFramework" version="6.1.3" />
+        </dependencies>
+    </metadata>
+	<files>
+		<file src="biz.dfch.CS.Web.Utilities\bin\Release\biz.dfch.CS.Web.Utilities.dll" target="lib\" />
+	</files>
+</package>
