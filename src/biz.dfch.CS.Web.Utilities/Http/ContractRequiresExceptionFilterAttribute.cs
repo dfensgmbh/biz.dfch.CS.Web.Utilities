@@ -19,11 +19,13 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
 using biz.dfch.CS.Utilities.Logging;
+using System.Diagnostics.Contracts;
 
 namespace biz.dfch.CS.Web.Utilities.Http
 {
     // see Exception Handling in ASP.NET Web API
     // http://www.asp.net/web-api/overview/error-handling/exception-handling
+
     // use with Contract.Requires as follows:
     // Contract.Requires(true == precondition, "|400|custom-error-message|");
     // or
@@ -40,7 +42,8 @@ namespace biz.dfch.CS.Web.Utilities.Http
             }
 
             var ex = context.Exception;
-            var message = String.Format(
+            Contract.Assert(null != ex);
+            var message = string.Format(
                 "{0}-EX {1}"
                 ,
                 context.ActionContext.Request.GetCorrelationId().ToString()
@@ -49,7 +52,14 @@ namespace biz.dfch.CS.Web.Utilities.Http
                 );
             Trace.WriteException(message, ex);
 
-            var exMessage = String.IsNullOrWhiteSpace(ex.Message) ? String.Empty : ex.Message;
+            var innerException = ex.InnerException;
+            while (null != innerException)
+            {
+                Trace.WriteException(innerException.Message, innerException);
+                innerException = innerException.InnerException;
+            }
+
+            var exMessage = string.IsNullOrWhiteSpace(ex.Message) ? string.Empty : ex.Message;
             var httpParams = exMessage.Split('|');
             if (1 >= httpParams.Length)
             {
@@ -60,7 +70,7 @@ namespace biz.dfch.CS.Web.Utilities.Http
             int statusCode;
             try
             {
-                statusCode = System.Convert.ToInt32(httpParams[1].Trim());
+                statusCode = Convert.ToInt32(httpParams[1].Trim());
                 statusCode = ((100 > statusCode) || (599 < statusCode)) ? 500 : statusCode;
             }
             catch
@@ -69,7 +79,7 @@ namespace biz.dfch.CS.Web.Utilities.Http
             }
 
             string statusMessage;
-            if (2 < httpParams.Length && !String.IsNullOrWhiteSpace(httpParams[2].Trim()))
+            if (2 < httpParams.Length && !string.IsNullOrWhiteSpace(httpParams[2].Trim()))
             {
                 statusMessage = httpParams[2].Trim();
             }
