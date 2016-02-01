@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.Web.Utilities</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>biz.dfch.CS.Web.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -23,9 +23,8 @@ Collection of web utility classes that provide functionalities like
 * REST helper
 		</description>
         <summary>Collection of web utility classes</summary>
-        <releaseNotes>20151222
-* Initial release
-* Extracted web related classes from biz.dfch.CS.System.Utilities</releaseNotes>
+        <releaseNotes>20160201
+* Improved ContractRequiresExceptionAttribute class</releaseNotes>
         <copyright>Copyright © 2015 d-fens GmbH</copyright>
         <tags>dfch web utilities C#</tags>
         <dependencies>
