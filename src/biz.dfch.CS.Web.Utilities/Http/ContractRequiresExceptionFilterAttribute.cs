@@ -46,16 +46,19 @@ namespace biz.dfch.CS.Web.Utilities.Http
             var message = string.Format(
                 "{0}-EX {1}"
                 ,
-                context.ActionContext.Request.GetCorrelationId().ToString()
+                context.ActionContext.Request.GetCorrelationId()
                 ,
                 ex.Message
                 );
             Trace.WriteException(message, ex);
 
+            var innerExceptionCount = 0;
             var innerException = ex.InnerException;
             while (null != innerException)
             {
-                Trace.WriteException(innerException.Message, innerException);
+                innerExceptionCount++;
+                var exceptionMessage = string.Format("{0}-EX {1}", context.ActionContext.Request.GetCorrelationId(), innerException.Message);
+                Trace.WriteException(exceptionMessage, innerException);
                 innerException = innerException.InnerException;
             }
 
@@ -63,7 +66,13 @@ namespace biz.dfch.CS.Web.Utilities.Http
             var httpParams = exMessage.Split('|');
             if (1 >= httpParams.Length)
             {
-                context.Response = context.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, ex.Message, ex);
+                context.Response = context.Request.CreateErrorResponse(
+                    HttpStatusCode.InternalServerError
+                    ,
+                    string.Concat("[CorrelationId: ", context.ActionContext.Request.GetCorrelationId(), "] ", ex.Message)
+                    ,
+                    ex
+                    );
                 return;
             }
 
@@ -81,11 +90,11 @@ namespace biz.dfch.CS.Web.Utilities.Http
             string statusMessage;
             if (2 < httpParams.Length && !string.IsNullOrWhiteSpace(httpParams[2].Trim()))
             {
-                statusMessage = httpParams[2].Trim();
+                statusMessage = string.Concat("[CorrelationId: ", context.ActionContext.Request.GetCorrelationId(), "] ", httpParams[2].Trim());
             }
             else
             {
-                statusMessage = httpParams[0].Trim();
+                statusMessage = string.Concat("[CorrelationId: ", context.ActionContext.Request.GetCorrelationId(), "] ", httpParams[0].Trim());
             }
             context.Response = context.Request.CreateErrorResponse((HttpStatusCode)statusCode, statusMessage);
         }
