@@ -136,7 +136,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                 {
                     foreach (var header in headers)
                     {
-                        httpClient.DefaultRequestHeaders.Add(header.Key, header.Value);
+                        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
                     }
                 }
 
