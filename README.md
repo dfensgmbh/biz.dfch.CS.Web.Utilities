@@ -29,6 +29,10 @@ This project containts a collection of utility classes that provide functionalit
 
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 
+### 1.1.0 - 20160818
+
+* Changed adding DefaultRequestHeaders of httpClient by using TryAddWithoutValidation instead of using Add to allow custom Accept header
+
 ### 1.0.1 - 20160201
 
 * Improved ContractRequiresExceptionAttribute class
