@@ -123,8 +123,14 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                     headers.Remove(AUTHORIZATION_HEADER_KEY);
                 }
 
+                var contentTypeAsString = _ContentType.GetStringValue();
+                if (null != headers && headers.ContainsKey(CONTENT_TYPE_HEADER_KEY))
+                {
+                    contentTypeAsString = headers[CONTENT_TYPE_HEADER_KEY];
+                    headers.Remove(CONTENT_TYPE_HEADER_KEY);
+                }
+
                 httpClient.DefaultRequestHeaders.Add(USER_AGENT_HEADER_KEY, ExtractUserAgentFromHeaders(headers));
-                httpClient.DefaultRequestHeaders.Add(CONTENT_TYPE_HEADER_KEY, _ContentType.GetStringValue());
 
                 if (null != headers)
                 {
@@ -145,12 +151,14 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                     case HttpMethod.Post:
                     {
                         HttpContent content = new StringContent(body);
+                        content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentTypeAsString);
                         response = httpClient.PostAsync(uri, content).Result;
                     }
                         break;
                     case HttpMethod.Put:
                     {
                         HttpContent content = new StringContent(body);
+                        content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentTypeAsString);
                         response = httpClient.PutAsync(uri, content).Result;
                     }
                         break;
