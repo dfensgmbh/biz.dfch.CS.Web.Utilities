@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-﻿using biz.dfch.CS.Utilities;
 using biz.dfch.CS.Utilities.Attributes;
 using System;
 using System.Collections.Generic;
@@ -117,12 +116,6 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                 httpClient.BaseAddress = new Uri(uri);
                 httpClient.Timeout = new TimeSpan(0, 0, _Timeout);
 
-                if (null != headers && headers.ContainsKey(CONTENT_TYPE_HEADER_KEY))
-                {
-                    _ContentType = EnumUtil.Parse<ContentType>(headers[CONTENT_TYPE_HEADER_KEY]);
-                    headers.Remove(CONTENT_TYPE_HEADER_KEY);
-                }
-
                 if (null != _AuthScheme && null != headers && headers.ContainsKey(AUTHORIZATION_HEADER_KEY))
                 {
                     httpClient.DefaultRequestHeaders.Authorization = 
@@ -131,6 +124,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                 }
 
                 httpClient.DefaultRequestHeaders.Add(USER_AGENT_HEADER_KEY, ExtractUserAgentFromHeaders(headers));
+                httpClient.DefaultRequestHeaders.Add(CONTENT_TYPE_HEADER_KEY, _ContentType.GetStringValue());
 
                 if (null != headers)
                 {
@@ -151,14 +145,12 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                     case HttpMethod.Post:
                     {
                         HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
                         response = httpClient.PostAsync(uri, content).Result;
                     }
                         break;
                     case HttpMethod.Put:
                     {
                         HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
                         response = httpClient.PutAsync(uri, content).Result;
                     }
                         break;
@@ -204,11 +196,11 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// Throws an ArgumentException if uri is not valid.
         /// </summary>
         /// <param name="uri">Uri as string</param>
-        private void ValidateUriParameter(String uri)
+        private void ValidateUriParameter(string uri)
         {
             if (String.IsNullOrWhiteSpace(uri))
             {
-                throw new ArgumentException(String.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
+                throw new ArgumentException(string.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
             }
         }
     }
