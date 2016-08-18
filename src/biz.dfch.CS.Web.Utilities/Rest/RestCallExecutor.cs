@@ -29,10 +29,10 @@ namespace biz.dfch.CS.Web.Utilities.Rest
     {
         #region Constants and Properties
         private const int DEFAULT_TIMEOUT = 90;
-        private const String DEFAULT_USER_AGENT = "RestCallExecutor";
-        private const String CONTENT_TYPE_HEADER_KEY = "Content-Type";
-        private const String AUTHORIZATION_HEADER_KEY = "Authorization";
-        private const String USER_AGENT_HEADER_KEY = "User-Agent";
+        private const string DEFAULT_USER_AGENT = "RestCallExecutor";
+        private const string CONTENT_TYPE_HEADER_KEY = "Content-Type";
+        private const string AUTHORIZATION_HEADER_KEY = "Authorization";
+        private const string USER_AGENT_HEADER_KEY = "User-Agent";
 
         private int _Timeout;
         public int Timeout
