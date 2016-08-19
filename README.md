@@ -29,6 +29,11 @@ This project containts a collection of utility classes that provide functionalit
 
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 
+### 1.2.0 - 20160819
+
+RestCallExecutor
+* ContentType handling adjusted to allow custom content types
+
 ### 1.1.0 - 20160818
 
 RestCallExecutor
