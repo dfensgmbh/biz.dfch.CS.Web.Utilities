@@ -19,6 +19,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace biz.dfch.CS.Web.Utilities.Rest
 {
@@ -150,15 +151,13 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                         break;
                     case HttpMethod.Post:
                     {
-                        HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeAsString);
+                        HttpContent content = new StringContent(body, null, contentTypeAsString);
                         response = httpClient.PostAsync(uri, content).Result;
                     }
                         break;
                     case HttpMethod.Put:
                     {
-                        HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeAsString);
+                        HttpContent content = new StringContent(body, null, contentTypeAsString);
                         response = httpClient.PutAsync(uri, content).Result;
                     }
                         break;
