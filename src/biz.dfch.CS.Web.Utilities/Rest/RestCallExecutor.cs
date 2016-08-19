@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-﻿using biz.dfch.CS.Utilities;
 using biz.dfch.CS.Utilities.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 
 namespace biz.dfch.CS.Web.Utilities.Rest
 {
@@ -30,10 +30,10 @@ namespace biz.dfch.CS.Web.Utilities.Rest
     {
         #region Constants and Properties
         private const int DEFAULT_TIMEOUT = 90;
-        private const String DEFAULT_USER_AGENT = "RestCallExecutor";
-        private const String CONTENT_TYPE_HEADER_KEY = "Content-Type";
-        private const String AUTHORIZATION_HEADER_KEY = "Authorization";
-        private const String USER_AGENT_HEADER_KEY = "User-Agent";
+        private const string DEFAULT_USER_AGENT = "RestCallExecutor";
+        private const string CONTENT_TYPE_HEADER_KEY = "Content-Type";
+        private const string AUTHORIZATION_HEADER_KEY = "Authorization";
+        private const string USER_AGENT_HEADER_KEY = "User-Agent";
 
         private int _Timeout;
         public int Timeout
@@ -117,17 +117,18 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                 httpClient.BaseAddress = new Uri(uri);
                 httpClient.Timeout = new TimeSpan(0, 0, _Timeout);
 
-                if (null != headers && headers.ContainsKey(CONTENT_TYPE_HEADER_KEY))
-                {
-                    _ContentType = EnumUtil.Parse<ContentType>(headers[CONTENT_TYPE_HEADER_KEY]);
-                    headers.Remove(CONTENT_TYPE_HEADER_KEY);
-                }
-
                 if (null != _AuthScheme && null != headers && headers.ContainsKey(AUTHORIZATION_HEADER_KEY))
                 {
                     httpClient.DefaultRequestHeaders.Authorization = 
                         new AuthenticationHeaderValue(_AuthScheme, headers[AUTHORIZATION_HEADER_KEY]);
                     headers.Remove(AUTHORIZATION_HEADER_KEY);
+                }
+
+                var contentTypeAsString = _ContentType.GetStringValue();
+                if (null != headers && headers.ContainsKey(CONTENT_TYPE_HEADER_KEY))
+                {
+                    contentTypeAsString = headers[CONTENT_TYPE_HEADER_KEY];
+                    headers.Remove(CONTENT_TYPE_HEADER_KEY);
                 }
 
                 httpClient.DefaultRequestHeaders.Add(USER_AGENT_HEADER_KEY, ExtractUserAgentFromHeaders(headers));
@@ -151,14 +152,14 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                     case HttpMethod.Post:
                     {
                         HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
+                        content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentTypeAsString);
                         response = httpClient.PostAsync(uri, content).Result;
                     }
                         break;
                     case HttpMethod.Put:
                     {
                         HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = new MediaTypeHeaderValue(_ContentType.GetStringValue());
+                        content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentTypeAsString);
                         response = httpClient.PutAsync(uri, content).Result;
                     }
                         break;
@@ -204,11 +205,11 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// Throws an ArgumentException if uri is not valid.
         /// </summary>
         /// <param name="uri">Uri as string</param>
-        private void ValidateUriParameter(String uri)
+        private void ValidateUriParameter(string uri)
         {
             if (String.IsNullOrWhiteSpace(uri))
             {
-                throw new ArgumentException(String.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
+                throw new ArgumentException(string.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
             }
         }
     }
