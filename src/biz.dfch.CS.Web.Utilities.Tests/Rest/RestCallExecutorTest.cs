@@ -385,12 +385,8 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, CONTENT_TYPE_VALUE))
                 .OccursOnce();
 
-            Mock.Arrange(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
-                .CallOriginal()
-                .OccursOnce();
-
-            Mock.Arrange(() => HttpClient.PostAsync(Arg.Is(new Uri(URI)), Arg.Is(new StringContent(SAMPLE_RESPONSE_BODY))).Result)
+            var content = new StringContent(SAMPLE_REQUEST_BODY, null, CONTENT_TYPE_VALUE);
+            Mock.Arrange(() => HttpClient.PostAsync(Arg.Is(new Uri(URI)), Arg.Is(content)).Result)
                 .IgnoreInstance()
                 .Returns(mockedResponseMessage)
                 .OccursOnce();
@@ -414,7 +410,6 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
-            Mock.Assert(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()));
             Mock.Assert(mockedResponseMessage);
         }
 
@@ -479,12 +474,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
-            Mock.Arrange(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
-                .CallOriginal()
-                .OccursOnce();
-
-            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY);
+            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY, null, ContentType.ApplicationJson.GetStringValue());
             Mock.Arrange(() => HttpClient.PostAsync(Arg.Is(new Uri(URI)), Arg.Is(content)).Result)
                 .IgnoreInstance()
                 .Returns(mockedResponseMessage)
@@ -508,7 +498,6 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
-            Mock.Assert(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()));
             Mock.Assert(mockedResponseMessage);
         }
 
@@ -573,12 +562,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
-            Mock.Arrange(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
-                .CallOriginal()
-                .OccursOnce();
-
-            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY);
+            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY, null, ContentType.ApplicationJson.GetStringValue());
             Mock.Arrange(() => HttpClient.PutAsync(Arg.Is(new Uri(URI)), Arg.Is(content)).Result)
                 .IgnoreInstance()
                 .Returns(mockedResponseMessage)
@@ -602,7 +586,6 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
-            Mock.Assert(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()));
             Mock.Assert(mockedResponseMessage);
         }
 
