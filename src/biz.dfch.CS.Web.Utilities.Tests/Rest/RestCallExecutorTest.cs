@@ -31,7 +31,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
     {
         private const string URI = "http://test/api/entities";
         private const string CONTENT_TYPE_KEY = "Content-Type";
-        private const string CONTENT_TYPE_VALUE = "application/arb.itrary+json;version=1.0";
+        private const string CONTENT_TYPE_VALUE = "application/vnd.abiquo.acceptedrequest+json; version=3.8";
         private const string USER_AGENT_KEY = "User-Agent";
         private const string AUTHORIZATION_HEADER_KEY = "Authorization";
         private const string ACCEPT_HEADER_KEY = "Accept";
@@ -305,9 +305,6 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .OccursOnce();
-
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
                 .IgnoreInstance()
                 .Returns(mockedResponseMessage)
@@ -385,7 +382,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, CONTENT_TYPE_VALUE))
                 .OccursOnce();
 
-            var content = new StringContent(SAMPLE_REQUEST_BODY, null, CONTENT_TYPE_VALUE);
+            var content = new StringContent(SAMPLE_REQUEST_BODY);
             Mock.Arrange(() => HttpClient.PostAsync(Arg.Is(new Uri(URI)), Arg.Is(content)).Result)
                 .IgnoreInstance()
                 .Returns(mockedResponseMessage)
@@ -474,7 +471,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
-            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY, null, ContentType.ApplicationJson.GetStringValue());
+            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY);
             Mock.Arrange(() => HttpClient.PostAsync(Arg.Is(new Uri(URI)), Arg.Is(content)).Result)
                 .IgnoreInstance()
                 .Returns(mockedResponseMessage)
@@ -562,7 +559,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
-            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY, null, ContentType.ApplicationJson.GetStringValue());
+            HttpContent content = new StringContent(SAMPLE_REQUEST_BODY);
             Mock.Arrange(() => HttpClient.PutAsync(Arg.Is(new Uri(URI)), Arg.Is(content)).Result)
                 .IgnoreInstance()
                 .Returns(mockedResponseMessage)
