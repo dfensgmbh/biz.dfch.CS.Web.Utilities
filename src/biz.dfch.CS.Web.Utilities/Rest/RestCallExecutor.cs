@@ -151,14 +151,14 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                     case HttpMethod.Post:
                     {
                         HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentTypeAsString);
+                        content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeAsString);
                         response = httpClient.PostAsync(uri, content).Result;
                     }
                         break;
                     case HttpMethod.Put:
                     {
                         HttpContent content = new StringContent(body);
-                        content.Headers.ContentType = MediaTypeHeaderValue.Parse(contentTypeAsString);
+                        content.Headers.ContentType = new MediaTypeHeaderValue(contentTypeAsString);
                         response = httpClient.PutAsync(uri, content).Result;
                     }
                         break;
