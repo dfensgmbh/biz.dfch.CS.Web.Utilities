@@ -379,7 +379,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, CONTENT_TYPE_VALUE))
+            Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
             var content = new StringContent(SAMPLE_REQUEST_BODY);
