@@ -207,6 +207,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         [TestMethod]
         public void InvokeGetExecutesGetRequestOnUriWithProvidedHeadersEnsuresSuccessStatusCodeAndReturnsResponseContent()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -216,15 +217,9 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(3);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -240,7 +235,12 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(URI, CreateSampleHeaders()));
+
+            // Act
+            var result = restCallExecutor.Invoke(URI, CreateSampleHeaders());
+
+            // Assert
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
@@ -250,6 +250,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         [TestMethod]
         public void InvokeGetExecutesGetRequestOnUriWithProvidedHeadersNotEnsuringSuccessStatusCodeReturnsResponseContent()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -259,15 +260,9 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(3);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -280,8 +275,12 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor(false);
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(URI, CreateSampleHeaders()));
+            
+            // Act
+            var result = restCallExecutor.Invoke(URI, CreateSampleHeaders());
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
 
+            // Assert
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
             Mock.Assert(mockedResponseMessage);
@@ -291,6 +290,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         [ExpectedException(typeof(HttpRequestException))]
         public void InvokeExecutesThrowsHttpRequestExceptionIfEnsureSuccessStatusCodeFails()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -300,15 +300,12 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(3);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -321,8 +318,11 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
+            
+            // Act
             restCallExecutor.Invoke(URI, CreateSampleHeaders());
 
+            // Assert
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
             Mock.Assert(mockedResponseMessage);
@@ -331,6 +331,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         [TestMethod]
         public void InvokeSetsDefaultUserAgentHeaderIfNoCustomUserAgentHeaderProvided()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -340,11 +341,6 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(2);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, "RestCallExecutor"))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -360,16 +356,21 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(URI));
+            var result = restCallExecutor.Invoke(URI);
 
+            // Act
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
+
+            // Assert
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
             Mock.Assert(mockedResponseMessage);
         }
 
         [TestMethod]
-        public void InvokeSetsOverwritesDefaultContentTypeHeaderIfCustomContentTypeHeaderProvided()
+        public void InvokePostOverwritesDefaultContentTypeHeaderIfCustomContentTypeHeaderProvided()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -379,19 +380,14 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(4);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
+            Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, CONTENT_TYPE_VALUE))
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationXml.GetStringValue()))
+            Mock.Arrange(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()))
                 .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, CONTENT_TYPE_VALUE))
-                .IgnoreInstance()
+                .CallOriginal()
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.PostAsync(Arg.Is(new Uri(URI)), Arg.Is(new StringContent(SAMPLE_RESPONSE_BODY))).Result)
@@ -409,16 +405,23 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             RestCallExecutor restCallExecutor = new RestCallExecutor();
             var headers = CreateSampleHeaders();
             headers.Add(CONTENT_TYPE_KEY, CONTENT_TYPE_VALUE);
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Post, URI, headers, SAMPLE_RESPONSE_BODY));
+
+            // Act
+            var result = restCallExecutor.Invoke(HttpMethod.Post, URI, headers, SAMPLE_RESPONSE_BODY);
+
+            // Assert
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
+            Mock.Assert(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()));
             Mock.Assert(mockedResponseMessage);
         }
 
         [TestMethod]
         public void InvokeHeadExecutesHeadRequestOnUriWithProvidedHeadersEnsuresSuccessStatusCodeAndReturnsResponseContent()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -428,15 +431,9 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(3);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -452,7 +449,12 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, CreateSampleHeaders(), null));
+
+            // Act
+            var result = restCallExecutor.Invoke(HttpMethod.Get, URI, CreateSampleHeaders(), null);
+
+            // Assert
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
@@ -462,6 +464,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         [TestMethod]
         public void InvokePostExecutesPostRequestOnUriWithProvidedHeadersAndBodyEnsuresSuccessStatusCodeAndReturnsResponseContent()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -471,15 +474,14 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(3);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
+            Mock.Arrange(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()))
                 .IgnoreInstance()
+                .CallOriginal()
                 .OccursOnce();
 
             HttpContent content = new StringContent(SAMPLE_REQUEST_BODY);
@@ -496,17 +498,24 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Post, URI, CreateSampleHeaders(), SAMPLE_REQUEST_BODY));
+
+            // Act
+            var result = restCallExecutor.Invoke(HttpMethod.Post, URI, CreateSampleHeaders(), SAMPLE_REQUEST_BODY);
+
+            // Assert
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
             Assert.AreEqual(ContentType.ApplicationJson, restCallExecutor.ContentType);
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
+            Mock.Assert(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()));
             Mock.Assert(mockedResponseMessage);
         }
 
         [TestMethod]
         public void InvokeDeleteExecutesDeleteRequestOnUriWithProvidedHeadersAndBodyEnsuresSuccessStatusCodeAndReturnsResponseContent()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -516,15 +525,10 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(3);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
+                .Returns(true)
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.DeleteAsync(Arg.Is(new Uri(URI))).Result)
@@ -540,8 +544,12 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Delete, URI, CreateSampleHeaders(), SAMPLE_REQUEST_BODY));
 
+            // Act
+            var result = restCallExecutor.Invoke(HttpMethod.Delete, URI, CreateSampleHeaders(), SAMPLE_REQUEST_BODY);
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
+
+            // Assert
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
             Mock.Assert(mockedResponseMessage);
@@ -550,6 +558,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
         [TestMethod]
         public void InvokePutExecutesPutRequestOnUriWithProvidedHeadersAndBodyEnsuresSuccessStatusCodeAndReturnsResponseContent()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -559,15 +568,14 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Occurs(3);
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
+            Mock.Arrange(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()))
                 .IgnoreInstance()
+                .CallOriginal()
                 .OccursOnce();
 
             HttpContent content = new StringContent(SAMPLE_REQUEST_BODY);
@@ -584,17 +592,24 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .OccursOnce();
 
             RestCallExecutor restCallExecutor = new RestCallExecutor();
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Put, URI, CreateSampleHeaders(), SAMPLE_REQUEST_BODY));
+
+            // Act
+            var result = restCallExecutor.Invoke(HttpMethod.Put, URI, CreateSampleHeaders(), SAMPLE_REQUEST_BODY);
+
+            // Assert
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
             Assert.AreEqual(ContentType.ApplicationJson, restCallExecutor.ContentType);
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
+            Mock.Assert(() => new MediaTypeHeaderValue(ContentType.ApplicationJson.GetStringValue()));
             Mock.Assert(mockedResponseMessage);
         }
 
         [TestMethod]
         public void InvokeWhenAuthSchemeIsSetSetsAuthorizationHeaderAccordingAuthScheme()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -603,23 +618,13 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Returns(mockedRequestHeaders)
                 .Occurs(4);
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN))
-                .IgnoreInstance()
+            Mock.ArrangeSet(() => mockedRequestHeaders.Authorization = Arg.Is(new AuthenticationHeaderValue(BEARER_AUTH_SCHEME, SAMPLE_BEARER_TOKEN)))
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationXml.GetStringValue()))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => new AuthenticationHeaderValue(Arg.Is(BEARER_AUTH_SCHEME), Arg.Is(SAMPLE_BEARER_TOKEN)))
+            Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -638,16 +643,22 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             restCallExecutor.AuthScheme = BEARER_AUTH_SCHEME;
             var headers = CreateSampleHeaders();
             headers.Add(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN);
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, headers, null));
 
+            // Act
+            var result = restCallExecutor.Invoke(HttpMethod.Get, URI, headers, null);
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
+
+            // Assert
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
+            Mock.AssertSet(() => mockedRequestHeaders.Authorization = Arg.Is(new AuthenticationHeaderValue(BEARER_AUTH_SCHEME, SAMPLE_BEARER_TOKEN)));
             Mock.Assert(mockedResponseMessage);
         }
 
         [TestMethod]
         public void InvokeSetsAuthorizationHeaderAccordingHeadersDictionaryWhenAuthSchemeIsNotSet()
         {
+            // Arrange
             var mockedResponseMessage = Mock.Create<HttpResponseMessage>();
             var mockedRequestHeaders = Mock.Create<HttpRequestHeaders>();
 
@@ -656,23 +667,16 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
                 .Returns(mockedRequestHeaders)
                 .Occurs(4);
 
-            Mock.Arrange(() => new AuthenticationHeaderValue(Arg.Is(BEARER_AUTH_SCHEME), Arg.Is(SAMPLE_BEARER_TOKEN)))
+            Mock.ArrangeSet(() => mockedRequestHeaders.Authorization = new AuthenticationHeaderValue(BEARER_AUTH_SCHEME, SAMPLE_BEARER_TOKEN))
                 .OccursNever();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN))
-                .IgnoreInstance()
+            Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN))
                 .OccursOnce();
 
             Mock.Arrange(() => mockedRequestHeaders.Add(USER_AGENT_KEY, TEST_USER_AGENT))
-                .IgnoreInstance()
                 .OccursOnce();
 
-            Mock.Arrange(() => mockedRequestHeaders.Add(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
-                .IgnoreInstance()
-                .OccursOnce();
-
-            Mock.Arrange(() => mockedRequestHeaders.Add(CONTENT_TYPE_KEY, ContentType.ApplicationJson.GetStringValue()))
-                .IgnoreInstance()
+            Mock.Arrange(() => mockedRequestHeaders.TryAddWithoutValidation(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE))
                 .OccursOnce();
 
             Mock.Arrange(() => HttpClient.GetAsync(Arg.Is(new Uri(URI))).Result)
@@ -690,10 +694,16 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             RestCallExecutor restCallExecutor = new RestCallExecutor();
             var headers = CreateSampleHeaders();
             headers.Add(AUTHORIZATION_HEADER_KEY, SAMPLE_BEARER_TOKEN);
-            Assert.AreEqual(SAMPLE_RESPONSE_BODY, restCallExecutor.Invoke(HttpMethod.Get, URI, headers, null));
+
+            // Act
+            var result = restCallExecutor.Invoke(HttpMethod.Get, URI, headers, null);
+            
+            // Assert
+            Assert.AreEqual(SAMPLE_RESPONSE_BODY, result);
 
             Mock.Assert(HttpClient);
             Mock.Assert(mockedRequestHeaders);
+            Mock.AssertSet(() => mockedRequestHeaders.Authorization = Arg.Is(new AuthenticationHeaderValue(BEARER_AUTH_SCHEME, SAMPLE_BEARER_TOKEN)));
             Mock.Assert(mockedResponseMessage);
         }
 
