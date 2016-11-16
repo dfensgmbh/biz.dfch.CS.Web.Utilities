@@ -29,6 +29,13 @@ This project containts a collection of utility classes that provide functionalit
 
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 
+### 2.0.0 - 20161116
+
+* Upgraded biz.dfch.CS.System.Utilities dependency to version 3.1.1
+  * Upgraded log4net dependency to version 2.0.5
+* Upgraded .NET runtime to 4.6 (from 4.5)
+* Activated Code Contracts properly
+
 ### 1.2.0 - 20160819
 
 RestCallExecutor
