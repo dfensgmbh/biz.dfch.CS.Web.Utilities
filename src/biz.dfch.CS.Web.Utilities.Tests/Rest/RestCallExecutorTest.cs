@@ -20,7 +20,6 @@ using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using biz.dfch.CS.Utilities.Attributes;
 using Telerik.JustMock;
 using HttpMethod = biz.dfch.CS.Web.Utilities.Rest.HttpMethod;
 
@@ -687,9 +686,9 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Assert(mockedResponseMessage);
         }
 
-        private IDictionary<String, String> CreateSampleHeaders()
+        private IDictionary<string, string> CreateSampleHeaders()
         {
-            var headers = new Dictionary<String, String>();
+            var headers = new Dictionary<string, string>();
             headers.Add(USER_AGENT_KEY, TEST_USER_AGENT);
             headers.Add(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE);
             return headers;

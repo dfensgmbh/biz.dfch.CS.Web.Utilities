@@ -28,7 +28,6 @@ using System.Web.Http.OData.Routing;
 using System.Web.Http.Routing;
 using Microsoft.Data.OData;
 using Microsoft.Data.OData.Query;
-using Diagnostics = System.Diagnostics;
 
 namespace biz.dfch.CS.Web.Utilities.OData
 {
@@ -57,7 +56,7 @@ namespace biz.dfch.CS.Web.Utilities.OData
             if (null != routeData)
             {
                 ODataPath path = newRequest.ODataProperties().Path;
-                Diagnostics::Trace.Assert(null != path);
+                System.Diagnostics.Trace.Assert(null != path);
                 var segment = path.Segments.OfType<KeyValuePathSegment>().FirstOrDefault();
                 if (null != segment)
                 {

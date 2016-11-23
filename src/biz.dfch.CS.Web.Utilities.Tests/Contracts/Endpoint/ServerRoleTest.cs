@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-using System;
-using System.Text;
-using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using biz.dfch.CS.Web.Utilities.Contracts.Endpoint;
 

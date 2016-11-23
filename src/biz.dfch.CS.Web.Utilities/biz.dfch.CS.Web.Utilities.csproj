@@ -120,17 +120,19 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
     <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>dfch.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="biz.dfch.CS.System.Utilities, Version=3.1.1.12435, Culture=neutral, PublicKeyToken=30acc2f3d5961f2d, processorArchitecture=MSIL">
       <HintPath>..\packages\biz.dfch.CS.System.Utilities.3.1.1\lib\biz.dfch.CS.System.Utilities.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    <Reference Include="biz.dfch.CS.Testing, Version=1.3.0.27560, Culture=neutral, PublicKeyToken=30acc2f3d5961f2d, processorArchitecture=MSIL">
+      <HintPath>..\packages\biz.dfch.CS.Testing.1.3.0\lib\biz.dfch.CS.Testing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="log4net, Version=1.2.15.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
@@ -173,10 +175,8 @@
     <Compile Include="Contracts\Endpoint\IODataEndpoint.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointData.cs" />
     <Compile Include="Contracts\Endpoint\ServerRole.cs" />
-    <Compile Include="Contracts\Model\BaseEntity.cs" />
     <Compile Include="Http\CatchallExceptionFilterAttribute.cs" />
     <Compile Include="Http\ContractRequiresExceptionFilterAttribute.cs" />
-    <Compile Include="Http\DbEntityValidationExceptionFilterAttribute.cs" />
     <Compile Include="Http\HttpStatusExceptionFilterAttribute.cs" />
     <Compile Include="Http\HttpStatusException.cs" />
     <Compile Include="Http\HttpRequestMessageExtension.cs" />
@@ -191,6 +191,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="dfch.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

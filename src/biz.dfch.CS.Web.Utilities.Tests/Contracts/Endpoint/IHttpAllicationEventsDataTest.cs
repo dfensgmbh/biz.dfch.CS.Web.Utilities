@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-using System;
-﻿using biz.dfch.CS.Web.Utilities.Contracts.Endpoint;
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace biz.dfch.CS.Web.Utilities.Tests.Contracts.Endpoint
 {

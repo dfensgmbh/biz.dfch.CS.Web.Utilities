@@ -19,7 +19,6 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Text;
 
 namespace biz.dfch.CS.Web.Utilities.Rest
 {
@@ -49,20 +48,20 @@ namespace biz.dfch.CS.Web.Utilities.Rest
             set { _ContentType = value; }
         }
 
-        private Boolean _EnsureSuccessStatusCode;
-        public Boolean EnsureSuccessStatusCode 
+        private bool _EnsureSuccessStatusCode;
+        public bool EnsureSuccessStatusCode 
         {
             get { return _EnsureSuccessStatusCode; }
             set { _EnsureSuccessStatusCode = value; }
         }
 
-        private String _AuthScheme;
+        private string _AuthScheme;
         /// <summary>
         /// Sets the authentication scheme to use for creating the 'Authorization'
         /// header out of the header values passed to the invoke method.
         /// (i.e. Basic, Bearer, ...)
         /// </summary>
-        public String AuthScheme
+        public string AuthScheme
         {
             get { return _AuthScheme; }
             set { _AuthScheme = value; }
@@ -70,7 +69,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         #endregion
 
         #region Constructors
-        public RestCallExecutor(Boolean ensureSuccessStatusCode = true)
+        public RestCallExecutor(bool ensureSuccessStatusCode = true)
         {
             _EnsureSuccessStatusCode = ensureSuccessStatusCode;
             _ContentType = ContentType.ApplicationJson;
@@ -84,7 +83,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// <param name="uri">A valid URI</param>
         /// <returns>The response body as String if succeded, otherwise an exception is thrown</returns>
         #region Invoke
-        public String Invoke(String uri)
+        public string Invoke(string uri)
         {
             return Invoke(HttpMethod.Get, uri, null, null);
         }
@@ -95,7 +94,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// <param name="uri">A valid URI</param>
         /// <param name="headers">A dictionary of headers (header key, header value)</param>
         /// <returns>The response body as String if succeded, otherwise an exception is thrown</returns>
-        public String Invoke(String uri, IDictionary<String, String> headers)
+        public string Invoke(string uri, IDictionary<string, string> headers)
         {
             return Invoke(HttpMethod.Get, uri, headers, null);
         }
@@ -108,7 +107,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// <param name="headers">A dictionary of headers (header key, header value)</param>
         /// <param name="body">The payload formatted according the ContentType property (default = application/json)</param>
         /// <returns>he response body as String if succeded, otherwise an exception is thrown</returns>
-        public String Invoke(HttpMethod method, String uri, IDictionary<String, String> headers, String body)
+        public string Invoke(HttpMethod method, string uri, IDictionary<string, string> headers, string body)
         {
             ValidateUriParameter(uri);
 
@@ -167,7 +166,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                         response = httpClient.DeleteAsync(uri).Result;
                         break;
                     default:
-                        throw new NotImplementedException(String.Format("{0}: Method not implemented. " +
+                        throw new NotImplementedException(string.Format("{0}: Method not implemented. " +
                                                                         "Currently only the following methods are implemented: 'GET', 'HEAD', 'POST', 'PUT', 'DELETE'.",
                             method.GetStringValue()));
                 }
@@ -188,7 +187,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// <param name="headers"></param>
         /// <returns>The user agent header value if present,
         /// otherwise the default value 'RestCallExecutor'</returns>
-        private String ExtractUserAgentFromHeaders(IDictionary<String, String> headers)
+        private string ExtractUserAgentFromHeaders(IDictionary<string, string> headers)
         {
             if (null != headers && headers.ContainsKey(USER_AGENT_HEADER_KEY))
             {
@@ -207,7 +206,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// <param name="uri">Uri as string</param>
         private void ValidateUriParameter(string uri)
         {
-            if (String.IsNullOrWhiteSpace(uri))
+            if (string.IsNullOrWhiteSpace(uri))
             {
                 throw new ArgumentException(string.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
             }

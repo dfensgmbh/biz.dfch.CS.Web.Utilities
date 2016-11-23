@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-using System;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
@@ -44,7 +43,7 @@ namespace biz.dfch.CS.Web.Utilities.Http
             }
 
             var ex = context.Exception;
-            var message = String.Format(
+            var message = string.Format(
                 "{0}-EX {1}"
                 ,
                 context.ActionContext.Request.GetCorrelationId().ToString()

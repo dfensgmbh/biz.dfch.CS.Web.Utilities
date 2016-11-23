@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// ReSharper disable InconsistentNaming
 namespace biz.dfch.CS.Web.Utilities.Contracts.Endpoint
 {
     public enum ServerRole

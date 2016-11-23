@@ -14,11 +14,6 @@
  * limitations under the License.
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using biz.dfch.CS.Web.Utilities.Http;
 using Newtonsoft.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

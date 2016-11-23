@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using biz.dfch.CS.Web.Utilities.Contracts.Model;
 using biz.dfch.CS.Web.Utilities.OData;
 using Microsoft.Data.OData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -64,7 +59,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
 
             Mock.Assert(controller);
 
-            ODataControllerHelper.ResponseCreated(controller, createBaseEntity(1));
+            ODataControllerHelper.ResponseCreated(controller, new BaseEntity(1));
         }
 
         [TestMethod]
@@ -81,7 +76,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
             Mock.Arrange(() => controller.Url.CreateODataLink(Arg.IsAny<string>(), Arg.IsAny<IODataPathHandler>(), Arg.IsAny<IList<ODataPathSegment>>()))
                 .Returns(ODATA_LINK).MustBeCalled();
 
-            var response = ODataControllerHelper.ResponseCreated(controller, createBaseEntity(1));
+            var response = ODataControllerHelper.ResponseCreated(controller, new BaseEntity(1));
             Assert.AreEqual(HttpStatusCode.Created, response.StatusCode);
 
             Mock.Assert(controller);
@@ -104,7 +99,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
                 .Returns(ODATA_LINK)
                 .MustBeCalled();
 
-            var response = ODataControllerHelper.ResponseCreated(controller, createBaseEntity(1));
+            var response = ODataControllerHelper.ResponseCreated(controller, new BaseEntity(1));
             Assert.IsNotNull(response.Headers.Location);
             Assert.AreEqual(ODATA_LINK, response.Headers.Location.ToString());
 
@@ -126,7 +121,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
                 .Returns(ODATA_LINK)
                 .MustBeCalled();
 
-            var response = ODataControllerHelper.ResponseCreated(controller, createBaseEntity(1));
+            var response = ODataControllerHelper.ResponseCreated(controller, new BaseEntity(1));
             Assert.IsNotNull(response.Headers.ETag);
 
             Mock.Assert(controller);
@@ -143,7 +138,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
 
             Mock.Assert(controller);
 
-            ODataControllerHelper.ResponseAccepted(controller, createBaseEntity(1));
+            ODataControllerHelper.ResponseAccepted(controller, new BaseEntity(1));
         }
 
         [TestMethod]
@@ -161,7 +156,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
                 .Returns(ODATA_LINK)
                 .MustBeCalled();
 
-            var response = ODataControllerHelper.ResponseAccepted(controller, createBaseEntity(1));
+            var response = ODataControllerHelper.ResponseAccepted(controller, new BaseEntity(1));
             Assert.AreEqual(HttpStatusCode.Accepted, response.StatusCode);
 
             Mock.Assert(controller);
@@ -184,7 +179,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
                 .Returns(ODATA_LINK)
                 .MustBeCalled();
 
-            var response = ODataControllerHelper.ResponseAccepted(controller, createBaseEntity(1));
+            var response = ODataControllerHelper.ResponseAccepted(controller, new BaseEntity(1));
             Assert.IsNotNull(response.Headers.Location);
             Assert.AreEqual(ODATA_LINK, response.Headers.Location.ToString());
 
@@ -208,17 +203,20 @@ namespace biz.dfch.CS.Web.Utilities.Tests.OData
                 .Returns(ODATA_LINK)
                 .MustBeCalled();
 
-            var response = ODataControllerHelper.ResponseAccepted(controller, createBaseEntity(1));
+            var response = ODataControllerHelper.ResponseAccepted(controller, new BaseEntity(1));
             Assert.IsNotNull(response.Headers.ETag);
 
             Mock.Assert(controller);
         }
+    }
 
-        private BaseEntity createBaseEntity(int id)
+    public class BaseEntity
+    {
+        public BaseEntity(long id)
         {
-            var baseEntity = new BaseEntity();
-            baseEntity.Id = id;
-            return baseEntity;
+            Id = id;
         }
+
+        public long Id { get; set; }
     }
 }

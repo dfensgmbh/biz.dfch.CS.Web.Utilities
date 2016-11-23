@@ -123,9 +123,19 @@
     <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>dfch.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="biz.dfch.CS.System.Utilities, Version=3.1.1.12435, Culture=neutral, PublicKeyToken=30acc2f3d5961f2d, processorArchitecture=MSIL">
       <HintPath>..\packages\biz.dfch.CS.System.Utilities.3.1.1\lib\biz.dfch.CS.System.Utilities.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="biz.dfch.CS.Testing, Version=1.3.0.27560, Culture=neutral, PublicKeyToken=30acc2f3d5961f2d, processorArchitecture=MSIL">
+      <HintPath>..\packages\biz.dfch.CS.Testing.1.3.0\lib\biz.dfch.CS.Testing.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -200,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="dfch.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

@@ -30,7 +30,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Contracts.Endpoint
             throw new NotImplementedException();
         }
 
-        private readonly String containerName = "myContainer";
+        private readonly string containerName = "myContainer";
         public string GetContainerName()
         {
             return containerName;
