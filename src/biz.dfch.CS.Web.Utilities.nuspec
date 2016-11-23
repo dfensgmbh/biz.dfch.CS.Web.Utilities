@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.Web.Utilities</id>
-        <version>2.0.0</version>
+        <version>3.0.0</version>
         <title>biz.dfch.CS.Web.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -41,15 +41,13 @@ This project containts a collection of utility classes that provide functionalit
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 		</description>
         <summary>Collection of web utility classes</summary>
-        <releaseNotes>20161116
+        <releaseNotes>20161123
 # FEATURES
 
-* Upgraded biz.dfch.CS.System.Utilities dependency to version 3.1.1
-  * Upgraded log4net dependency to version 2.0.5
-* Upgraded .NET runtime to 4.6 (from 4.5)
-* Activated Code Contracts properly
+* Removed dependency to EntityFramework
+* Added strong name for assembly
 		</releaseNotes>
-        <copyright>Copyright © 2015 d-fens GmbH</copyright>
+        <copyright>Copyright © 2015-2016 d-fens GmbH</copyright>
         <tags>dfch web utilities C#</tags>
         <dependencies>
 			<dependency id="biz.dfch.CS.System.Utilities" version="3.1.1" />
@@ -60,10 +58,10 @@ See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/relea
 			<dependency id="Microsoft.AspNet.WebApi.OData" version="5.2.0" />
 			<dependency id="Microsoft.Data.Edm" version="5.6.4" />
 			<dependency id="Microsoft.Data.OData" version="5.6.0" />
-			<dependency id="EntityFramework" version="6.1.3" />
         </dependencies>
     </metadata>
 	<files>
 		<file src="biz.dfch.CS.Web.Utilities\bin\Release\biz.dfch.CS.Web.Utilities.dll" target="lib\" />
+		<file src="biz.dfch.CS.Web.Utilities\bin\Release\CodeContracts\biz.dfch.CS.Web.Utilities.Contracts.dll" target="lib\CodeContracts\" />
 	</files>
 </package>
