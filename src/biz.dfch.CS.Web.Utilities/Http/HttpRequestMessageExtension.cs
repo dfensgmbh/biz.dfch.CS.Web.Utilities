@@ -28,7 +28,7 @@ namespace biz.dfch.CS.Web.Utilities.Http
             return request.CreateResponse(httpStatusCode, httpStatusErrorMessage.ToString());
         }
         
-        public static HttpResponseMessage CreateCustomErrorResponse(this HttpRequestMessage request, HttpStatusCode httpStatusCode, String message, int? code = null)
+        public static HttpResponseMessage CreateCustomErrorResponse(this HttpRequestMessage request, HttpStatusCode httpStatusCode, string message, int? code = null)
         {
             var errmsg = new HttpStatusErrorMessage()
             {

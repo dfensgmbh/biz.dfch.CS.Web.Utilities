@@ -31,7 +31,7 @@ namespace biz.dfch.CS.Web.Utilities.Http
             }
 
             var ex = context.Exception as HttpStatusException;
-            var message = String.Format(
+            var message = string.Format(
                 "{0}-EX [{1}] {2}"
                 ,
                 context.ActionContext.Request.GetCorrelationId().ToString()

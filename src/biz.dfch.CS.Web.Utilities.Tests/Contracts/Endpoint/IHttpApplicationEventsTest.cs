@@ -23,7 +23,7 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Contracts.Endpoint
     public class IHttpApplicationEventsTest
     {
         private readonly HttpApplicationEvents httpApplicationEvents = new HttpApplicationEvents();
-        private readonly object sender = new Object();
+        private readonly object sender = new object();
         private readonly EventArgs e = new EventArgs();
 
         [TestMethod]

@@ -23,7 +23,7 @@ namespace biz.dfch.CS.Web.Utilities.Contracts.Endpoint
     {
         IEdmModel GetModel();
 
-        String GetContainerName();
+        string GetContainerName();
 
         Version GetVersion();
     }

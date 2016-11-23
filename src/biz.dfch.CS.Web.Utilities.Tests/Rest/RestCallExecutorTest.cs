@@ -687,9 +687,9 @@ namespace biz.dfch.CS.Web.Utilities.Tests.Rest
             Mock.Assert(mockedResponseMessage);
         }
 
-        private IDictionary<String, String> CreateSampleHeaders()
+        private IDictionary<string, string> CreateSampleHeaders()
         {
-            var headers = new Dictionary<String, String>();
+            var headers = new Dictionary<string, string>();
             headers.Add(USER_AGENT_KEY, TEST_USER_AGENT);
             headers.Add(ACCEPT_HEADER_KEY, ACCEPT_HEADER_VALUE);
             return headers;
