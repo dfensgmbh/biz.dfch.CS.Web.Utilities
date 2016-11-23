@@ -20,7 +20,6 @@ using biz.dfch.CS.Web.Utilities.Rest;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using biz.dfch.CS.Utilities.Attributes;
 using Telerik.JustMock;
 using HttpMethod = biz.dfch.CS.Web.Utilities.Rest.HttpMethod;
 

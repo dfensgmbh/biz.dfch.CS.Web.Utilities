@@ -14,9 +14,7 @@
  * limitations under the License.
  */
 
-using System;
 using System.ComponentModel;
-using System.Linq;
 
 namespace biz.dfch.CS.Web.Utilities.Contracts.Endpoint
 {

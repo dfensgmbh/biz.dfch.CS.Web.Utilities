@@ -14,12 +14,7 @@
  * limitations under the License.
  */
 
-﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using biz.dfch.CS.Web.Utilities.Contracts.Model;
 using biz.dfch.CS.Web.Utilities.OData;
 using Microsoft.Data.OData;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
