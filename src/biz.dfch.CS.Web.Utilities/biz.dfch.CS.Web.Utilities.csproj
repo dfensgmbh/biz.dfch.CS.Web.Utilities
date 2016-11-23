@@ -173,7 +173,6 @@
     <Compile Include="Contracts\Endpoint\IODataEndpoint.cs" />
     <Compile Include="Contracts\Endpoint\IODataEndpointData.cs" />
     <Compile Include="Contracts\Endpoint\ServerRole.cs" />
-    <Compile Include="Contracts\Model\BaseEntity.cs" />
     <Compile Include="Http\CatchallExceptionFilterAttribute.cs" />
     <Compile Include="Http\ContractRequiresExceptionFilterAttribute.cs" />
     <Compile Include="Http\DbEntityValidationExceptionFilterAttribute.cs" />
