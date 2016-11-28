@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("d-fens GmbH")]
 [assembly: AssemblyProduct("biz.dfch.CS.Web.Utilities.Tests")]
-[assembly: AssemblyCopyright("Copyright ©  2015 d-fens GmbH")]
+[assembly: AssemblyCopyright("Copyright © 2015-2016 d-fens GmbH")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,4 +32,3 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("4200.4201.4202.4203")]
-// [assembly: AssemblyFileVersion("1.0.0.0")]
