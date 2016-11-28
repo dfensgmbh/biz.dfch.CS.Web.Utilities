@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.Web.Utilities</id>
-        <version>3.0.0</version>
+        <version>3.1.0</version>
         <title>biz.dfch.CS.Web.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -41,18 +41,20 @@ This project containts a collection of utility classes that provide functionalit
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 		</description>
         <summary>Collection of web utility classes</summary>
-        <releaseNotes>20161123
+        <releaseNotes>20161128
 # FEATURES
 
-* Removed dependency to EntityFramework
-* Added strong name for assembly
+* removed dependency on biz.dfch.CS.System.Utilities
+* removed dependency on log4net
+* updated to Newtonsoft.Json 9.0.1
+* added biz.dfch.CS.Commons 1.4.0
+* changed logging to log to TraceSource ("biz.dfch.CS.Web.Utilities")
 		</releaseNotes>
         <copyright>Copyright © 2015-2016 d-fens GmbH</copyright>
         <tags>dfch web utilities C#</tags>
         <dependencies>
-			<dependency id="biz.dfch.CS.System.Utilities" version="3.1.1" />
-			<dependency id="log4net" version="2.0.5" />
-			<dependency id="Newtonsoft.Json" version="6.0.8" />
+			<dependency id="biz.dfch.CS.Commons" version="1.4.0" />
+			<dependency id="Newtonsoft.Json" version="9.0.1" />
 			<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
 			<dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
 			<dependency id="Microsoft.AspNet.WebApi.OData" version="5.2.0" />
