@@ -19,7 +19,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using biz.dfch.CS.Utilities.Logging;
 using System.Web.Http.OData.Routing;
 using System.Web.Http.OData;
 ﻿using System.Web.Http.OData.Extensions;
@@ -45,20 +44,23 @@ namespace biz.dfch.CS.Web.Utilities.OData
 
             if (!controller.ControllerContext.RouteData.Values.ContainsKey("controller"))
             {
-                var msg = "Controller RouteData is missing 'controller' value!";
-                Debug.WriteLine(msg);
+                const string msg = "Controller RouteData is missing 'controller' value!";
+                System.Diagnostics.Debug.WriteLine(msg);
                 throw new ODataErrorException(msg);
             }
+
             segments.Add(new EntitySetPathSegment(controller.ControllerContext.RouteData.Values["controller"].ToString()));
             var propertyInfo = entity.GetType().GetProperty(key);
             var value = propertyInfo.GetValue(entity, null);
+            
             segments.Add(new KeyValuePathSegment(
                 value is string
                 ?
-                string.Format("'{0}'", value.ToString())
+                string.Format("'{0}'", value)
                 :
                 value.ToString())
                 );
+            
             var uri = new Uri(controller.Url.CreateODataLink(
                 controller.Request.ODataProperties().RouteName
                 ,
@@ -66,10 +68,13 @@ namespace biz.dfch.CS.Web.Utilities.OData
                 ,
                 segments
                 ));
+            
             var response = controller.Request.CreateResponse(httpStatusCode, entity);
             response.Headers.Location = uri;
+            
             var eTag = string.Format("\"{0}\"", System.Convert.ToString(DateTime.UtcNow.ToBinary()));
             response.Headers.ETag = new EntityTagHeaderValue(eTag);
+            
             return response;
         }
     }
