@@ -14,14 +14,18 @@
  * limitations under the License.
  */
 
+using System.Diagnostics;
 using System.Net.Http;
 using System.Web.Http.Filters;
-using biz.dfch.CS.Utilities.Logging;
+using biz.dfch.CS.Commons.Diagnostics;
+using TraceSource = biz.dfch.CS.Commons.Diagnostics.TraceSource;
 
 namespace biz.dfch.CS.Web.Utilities.Http
 {
     public class HttpStatusExceptionFilterAttribute : ExceptionFilterAttribute
     {
+        private static readonly TraceSource _traceSource = Logger.Get("biz.dfch.CS.Web.Utilities");
+
         public override void OnException(HttpActionExecutedContext context)
         {
             if (null == context || null == context.Exception || !(context.Exception is HttpStatusException))
@@ -39,7 +43,8 @@ namespace biz.dfch.CS.Web.Utilities.Http
                 ,
                 ex.Message
                 );
-            Trace.WriteException(message, ex);
+
+            _traceSource.TraceException(ex, message);
 
             context.Response = context.Request.CreateErrorResponse(ex.StatusCode, ex.Message);
         }

@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-using biz.dfch.CS.Utilities.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using biz.dfch.CS.Commons.Converters;
 
 namespace biz.dfch.CS.Web.Utilities.Rest
 {
@@ -34,47 +34,30 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         private const string AUTHORIZATION_HEADER_KEY = "Authorization";
         private const string USER_AGENT_HEADER_KEY = "User-Agent";
 
-        private int _Timeout;
-        public int Timeout
-        {
-            get { return _Timeout; }
-            set { _Timeout = value; }
-        }
+        public int Timeout { get; set; }
 
-        private ContentType _ContentType;
-        public ContentType ContentType
-        {
-            get { return _ContentType; }
-            set { _ContentType = value; }
-        }
+        public ContentType ContentType { get; set; }
 
-        private bool _EnsureSuccessStatusCode;
-        public bool EnsureSuccessStatusCode 
-        {
-            get { return _EnsureSuccessStatusCode; }
-            set { _EnsureSuccessStatusCode = value; }
-        }
+        public bool EnsureSuccessStatusCode { get; set; }
 
-        private string _AuthScheme;
         /// <summary>
         /// Sets the authentication scheme to use for creating the 'Authorization'
         /// header out of the header values passed to the invoke method.
         /// (i.e. Basic, Bearer, ...)
         /// </summary>
-        public string AuthScheme
-        {
-            get { return _AuthScheme; }
-            set { _AuthScheme = value; }
-        }
+        public string AuthScheme { get; set; }
+
         #endregion
 
         #region Constructors
+
         public RestCallExecutor(bool ensureSuccessStatusCode = true)
         {
-            _EnsureSuccessStatusCode = ensureSuccessStatusCode;
-            _ContentType = ContentType.ApplicationJson;
-            _Timeout = DEFAULT_TIMEOUT;
+            EnsureSuccessStatusCode = ensureSuccessStatusCode;
+            ContentType = ContentType.ApplicationJson;
+            Timeout = DEFAULT_TIMEOUT;
         }
+        
         #endregion
 
         /// <summary>
@@ -83,6 +66,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// <param name="uri">A valid URI</param>
         /// <returns>The response body as String if succeded, otherwise an exception is thrown</returns>
         #region Invoke
+
         public string Invoke(string uri)
         {
             return Invoke(HttpMethod.Get, uri, null, null);
@@ -114,16 +98,16 @@ namespace biz.dfch.CS.Web.Utilities.Rest
             using (var httpClient = new HttpClient())
             {
                 httpClient.BaseAddress = new Uri(uri);
-                httpClient.Timeout = new TimeSpan(0, 0, _Timeout);
+                httpClient.Timeout = new TimeSpan(0, 0, Timeout);
 
-                if (null != _AuthScheme && null != headers && headers.ContainsKey(AUTHORIZATION_HEADER_KEY))
+                if (null != AuthScheme && null != headers && headers.ContainsKey(AUTHORIZATION_HEADER_KEY))
                 {
                     httpClient.DefaultRequestHeaders.Authorization = 
-                        new AuthenticationHeaderValue(_AuthScheme, headers[AUTHORIZATION_HEADER_KEY]);
+                        new AuthenticationHeaderValue(AuthScheme, headers[AUTHORIZATION_HEADER_KEY]);
                     headers.Remove(AUTHORIZATION_HEADER_KEY);
                 }
 
-                var contentTypeAsString = _ContentType.GetStringValue();
+                var contentTypeAsString = ContentType.GetStringValue();
                 if (null != headers && headers.ContainsKey(CONTENT_TYPE_HEADER_KEY))
                 {
                     contentTypeAsString = headers[CONTENT_TYPE_HEADER_KEY];
@@ -148,6 +132,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                     case HttpMethod.Head:
                         response = httpClient.GetAsync(uri).Result;
                         break;
+                    
                     case HttpMethod.Post:
                     {
                         HttpContent content = new StringContent(body);
@@ -155,6 +140,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                         response = httpClient.PostAsync(uri, content).Result;
                     }
                         break;
+                    
                     case HttpMethod.Put:
                     {
                         HttpContent content = new StringContent(body);
@@ -162,13 +148,17 @@ namespace biz.dfch.CS.Web.Utilities.Rest
                         response = httpClient.PutAsync(uri, content).Result;
                     }
                         break;
+                    
                     case HttpMethod.Delete:
                         response = httpClient.DeleteAsync(uri).Result;
                         break;
+                    
                     default:
                         throw new NotImplementedException(string.Format("{0}: Method not implemented. " +
-                                                                        "Currently only the following methods are implemented: 'GET', 'HEAD', 'POST', 'PUT', 'DELETE'.",
-                            method.GetStringValue()));
+                                                            "Currently only the following methods are implemented: 'GET', 'HEAD', 'POST', 'PUT', 'DELETE'.",
+                        
+                        // DFTODO - what is this statement needed for ???
+                        method.GetStringValue()));
                 }
 
                 if (EnsureSuccessStatusCode)
@@ -189,14 +179,17 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         /// otherwise the default value 'RestCallExecutor'</returns>
         private string ExtractUserAgentFromHeaders(IDictionary<string, string> headers)
         {
-            if (null != headers && headers.ContainsKey(USER_AGENT_HEADER_KEY))
+            if (null == headers || !headers.ContainsKey(USER_AGENT_HEADER_KEY))
             {
-                var userAgent = headers[USER_AGENT_HEADER_KEY];
-                headers.Remove(USER_AGENT_HEADER_KEY);
-                return userAgent;
+                return DEFAULT_USER_AGENT;
             }
-            return DEFAULT_USER_AGENT;
+            
+            var userAgent = headers[USER_AGENT_HEADER_KEY];
+            headers.Remove(USER_AGENT_HEADER_KEY);
+            
+            return userAgent;
         }
+
         #endregion
 
         /// <summary>
@@ -208,7 +201,7 @@ namespace biz.dfch.CS.Web.Utilities.Rest
         {
             if (string.IsNullOrWhiteSpace(uri))
             {
-                throw new ArgumentException(string.Format("uri: Parameter validation FAILED. Parameter cannot be null or empty."), "uri");
+                throw new ArgumentException("uri: Parameter validation FAILED. Parameter cannot be null or empty.", "uri");
             }
         }
     }

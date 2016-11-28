@@ -17,13 +17,15 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
-using biz.dfch.CS.Utilities.Logging;
+using biz.dfch.CS.Commons.Diagnostics;
 
 namespace biz.dfch.CS.Web.Utilities.Http
 {
     public class CatchallExceptionFilterAttribute : ExceptionFilterAttribute
     {
         private static bool _suppressStackTrace = false;
+
+        private static readonly TraceSource _traceSource = Logger.Get("biz.dfch.CS.Web.Utilities");
 
         public CatchallExceptionFilterAttribute()
         {
@@ -46,11 +48,12 @@ namespace biz.dfch.CS.Web.Utilities.Http
             var message = string.Format(
                 "{0}-EX {1}"
                 ,
-                context.ActionContext.Request.GetCorrelationId().ToString()
+                context.ActionContext.Request.GetCorrelationId()
                 ,
                 ex.Message
                 );
-            Trace.WriteException(message, ex);
+
+            _traceSource.TraceException(ex, message);
 
             if(_suppressStackTrace)
             {

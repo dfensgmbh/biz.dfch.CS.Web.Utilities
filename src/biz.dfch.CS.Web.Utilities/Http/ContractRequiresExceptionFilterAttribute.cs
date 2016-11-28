@@ -15,11 +15,13 @@
  */
 
 using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http.Filters;
-using biz.dfch.CS.Utilities.Logging;
 using System.Diagnostics.Contracts;
+using biz.dfch.CS.Commons.Diagnostics;
+using TraceSource = biz.dfch.CS.Commons.Diagnostics.TraceSource;
 
 namespace biz.dfch.CS.Web.Utilities.Http
 {
@@ -34,6 +36,8 @@ namespace biz.dfch.CS.Web.Utilities.Http
     {
         private const string CONTRACT_REQUIRES_EXCEPTION_FULLNAME = "System.Diagnostics.Contracts.__ContractsRuntime+ContractException";
 
+        private static readonly TraceSource _traceSource = Logger.Get("biz.dfch.CS.Web.Utilities");
+
         public override void OnException(HttpActionExecutedContext context)
         {
             if ((null == context.Exception) || (CONTRACT_REQUIRES_EXCEPTION_FULLNAME != context.Exception.GetType().FullName))
@@ -43,6 +47,7 @@ namespace biz.dfch.CS.Web.Utilities.Http
 
             var ex = context.Exception;
             Contract.Assert(null != ex);
+            
             var message = string.Format(
                 "{0}-EX {1}"
                 ,
@@ -50,15 +55,16 @@ namespace biz.dfch.CS.Web.Utilities.Http
                 ,
                 ex.Message
                 );
-            Trace.WriteException(message, ex);
+            
+            _traceSource.TraceException(ex, message);
 
-            var innerExceptionCount = 0;
+            //var innerExceptionCount = 0;
             var innerException = ex.InnerException;
             while (null != innerException)
             {
-                innerExceptionCount++;
+                //innerExceptionCount++;
                 var exceptionMessage = string.Format("{0}-EX {1}", context.ActionContext.Request.GetCorrelationId(), innerException.Message);
-                Trace.WriteException(exceptionMessage, innerException);
+                _traceSource.TraceException(innerException, exceptionMessage);
                 innerException = innerException.InnerException;
             }
 
