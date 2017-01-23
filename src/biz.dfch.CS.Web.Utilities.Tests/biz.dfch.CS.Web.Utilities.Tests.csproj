@@ -163,8 +163,9 @@
     <Reference Include="System.Web.Http.OData">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.2.0\lib\net45\System.Web.Http.OData.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.JustMock">
-      <HintPath>../JustMock/Telerik.JustMock.dll</HintPath>
+    <Reference Include="Telerik.JustMock, Version=2016.3.914.2, Culture=neutral, PublicKeyToken=721b6c5bc0326b3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\JustMock\Telerik.JustMock.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Choose>
