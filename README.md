@@ -19,15 +19,37 @@ d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
 
 This project containts a collection of utility classes that provide functionalities like
 
-* Contracts for endpoints
 * ODataController helper
-* REST helper
+* REST call executor
+* ExceptionFilterAttributes
 
 **Telerik JustMock has to be licensed separately. Only the code samples (source code files) are licensed under the Apache 2.0 license. The Telerik JustMock software has to be licensed separately. See the NOTICE file for more information about this.**
 
 ## [Release Notes](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases)
 
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
+
+### 4.0.0 - 20170123
+
+* Upgraded to .NET Framework 4.6.2
+* Removed dependency to Log4net
+* Updated dependency `biz.dfch.CS.Commons` to version `1.11.0`
+* Updated dependency `Microsoft.AspNet.WebApi.OData` to version `5.7.0`
+* Updated dependency `JustMock` to version `2016.3.914.2`
+* Cleaned up packages.config
+
+### 3.1.0 - 20161128
+
+* removed dependency on biz.dfch.CS.System.Utilities
+* removed dependency on log4net
+* updated to Newtonsoft.Json 9.0.1
+* added biz.dfch.CS.Commons 1.4.0
+* changed logging to log to TraceSource (`biz.dfch.CS.Web.Utilities`)
+
+### 3.0.0 - 20161123
+
+* Removed dependency to EntityFramework
+* Added strong name for assembly
 
 ### 2.0.0 - 20161116
 
@@ -49,7 +71,6 @@ RestCallExecutor
 ### 1.0.1 - 20160201
 
 * Improved ContractRequiresExceptionAttribute class
-
 
 ### 1.0.0 - 20151222
 
