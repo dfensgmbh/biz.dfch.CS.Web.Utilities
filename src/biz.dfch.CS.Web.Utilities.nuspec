@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.Web.Utilities</id>
-        <version>4.0.0</version>
+        <version>4.0.1</version>
         <title>biz.dfch.CS.Web.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -42,19 +42,10 @@ See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/relea
 		</description>
         <summary>Collection of web utility classes</summary>
         <releaseNotes>20170123
-# BREAKING CHANGES
-
-* Upgraded to .NET Framework 4.6.2
-* Removed dependency to Log4net
-
-# FEATURES
-
-* Updated dependency biz.dfch.CS.Commons to version 1.11.0
-* Updated dependency Microsoft.AspNet.WebApi.OData to version 5.7.0
-
 # NOTES
 
-* Cleaned up packages.config
+ContractRequiresExceptionFilterAttribute
+* Validation, exception code handling and logging improved
 		</releaseNotes>
         <copyright>Copyright © 2015-2017 d-fens GmbH</copyright>
         <tags>dfch web utilities C#</tags>

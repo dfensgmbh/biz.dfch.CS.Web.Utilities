@@ -29,6 +29,10 @@ This project containts a collection of utility classes that provide functionalit
 
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 
+### 4.0.1 - 20170123
+
+* Validation, exception code handling and logging improved in `ContractRequiresExceptionFilterAttribute`
+
 ### 4.0.0 - 20170123
 
 * Upgraded to .NET Framework 4.6.2
