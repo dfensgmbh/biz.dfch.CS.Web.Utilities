@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>biz.dfch.CS.Web.Utilities</id>
-        <version>3.1.0</version>
+        <version>4.0.0</version>
         <title>biz.dfch.CS.Web.Utilities</title>
         <authors>d-fens GmbH</authors>
         <owners>d-fens GmbH</owners>
@@ -30,9 +30,9 @@ d-fens GmbH, General-Guisan-Strasse 6, CH-6300 Zug, Switzerland
 
 This project containts a collection of utility classes that provide functionalities like
 
-* Contracts for endpoints
 * ODataController helper
-* REST helper
+* REST call executor
+* ExceptionFilterAttributes
 
 **Telerik JustMock has to be licensed separately. Only the code samples (source code files) are licensed under the Apache 2.0 license. The Telerik JustMock software has to be licensed separately. See the NOTICE file for more information about this.**
 
@@ -41,25 +41,33 @@ This project containts a collection of utility classes that provide functionalit
 See also [Releases](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/releases) and [Tags](https://github.com/dfensgmbh/biz.dfch.CS.Web.Utilities/tags)
 		</description>
         <summary>Collection of web utility classes</summary>
-        <releaseNotes>20161128
+        <releaseNotes>20170123
+# BREAKING CHANGES
+
+* Upgraded to .NET Framework 4.6.2
+* Removed dependency to Log4net
+
 # FEATURES
 
-* removed dependency on biz.dfch.CS.System.Utilities
-* removed dependency on log4net
-* updated to Newtonsoft.Json 9.0.1
-* added biz.dfch.CS.Commons 1.4.0
-* changed logging to log to TraceSource ("biz.dfch.CS.Web.Utilities")
+* Updated dependency biz.dfch.CS.Commons to version 1.11.0
+* Updated dependency Microsoft.AspNet.WebApi.OData to version 5.7.0
+
+# NOTES
+
+* Cleaned up packages.config
 		</releaseNotes>
-        <copyright>Copyright © 2015-2016 d-fens GmbH</copyright>
+        <copyright>Copyright © 2015-2017 d-fens GmbH</copyright>
         <tags>dfch web utilities C#</tags>
         <dependencies>
-			<dependency id="biz.dfch.CS.Commons" version="1.4.0" />
-			<dependency id="Newtonsoft.Json" version="9.0.1" />
+			<dependency id="biz.dfch.CS.Commons" version="1.11.0" />
 			<dependency id="Microsoft.AspNet.WebApi.Client" version="5.2.3" />
 			<dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
-			<dependency id="Microsoft.AspNet.WebApi.OData" version="5.2.0" />
+			<dependency id="Microsoft.AspNet.WebApi.OData" version="5.7.0" />
 			<dependency id="Microsoft.Data.Edm" version="5.6.4" />
-			<dependency id="Microsoft.Data.OData" version="5.6.0" />
+			<dependency id="Microsoft.Data.OData" version="5.6.4" />
+			<dependency id="Newtonsoft.Json" version="9.0.1" />
+			<dependency id="System.ComponentModel.Annotations" version="4.3.0" />
+			<dependency id="System.Spatial" version="5.6.4" />
         </dependencies>
     </metadata>
 	<files>

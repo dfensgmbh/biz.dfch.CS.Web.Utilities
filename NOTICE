@@ -6,15 +6,6 @@ Copyright 2015 d-fens GmbH
 This product includes software developed at
 d-fens GmbH (http://d-fens.ch/).
 
-=============================================================================
-============================================================================
-"Apache logging services", log4net
-Copyright 2014 The Apache Software Foundation
-
-This product includes software developed at
-The Apache Software Foundation (http://www.apache.org/).
-============================================================================
-
 ============================================================================
 ============================================================================
 Json.NET
@@ -44,7 +35,7 @@ IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ============================================================================
 
-===========================================================================
+============================================================================
 ============================================================================
 JustMock
 .NET mocking framework for unit testing
@@ -175,4 +166,3 @@ The Programs and the Documentation are "Commercial Items", as that term is defin
 
 YOU ACKNOWLEDGE THAT YOU HAVE READ THIS AGREEMENT, THAT YOU UNDERSTAND THIS AGREEMENT, AND UNDERSTAND THAT BY CONTINUING THE INSTALLATION OF THE SOFTWARE PRODUCT, BY LOADING OR RUNNING THE SOFTWARE PRODUCT, OR BY PLACING OR COPYING THE SOFTWARE ONTO YOUR COMPUTER HARD DRIVE, YOU AGREE TO BE BOUND BY THIS AGREEMENT’S TERMS AND CONDITIONS. YOU FURTHER AGREE THAT, EXCEPT FOR WRITTEN SEPARATE AGREEMENTS BETWEEN TELERIK AND YOU, THIS AGREEMENT IS A COMPLETE AND EXCLUSIVE STATEMENT OF THE RIGHTS AND LIABILITIES OF THE PARTIES.
 ============================================================================
-
